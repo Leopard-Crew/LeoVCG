@@ -25,6 +25,12 @@ g++ $COMMON_FLAGS $COMMON_INCLUDES \
     src/vcg_normals_probe.cpp \
     -o build/vcg_normals_probe
 
+echo "Building PLY write probe..."
+g++ $COMMON_FLAGS $COMMON_INCLUDES \
+    src/vcg_ply_write_probe.cpp \
+    vendor/vcglib/wrap/ply/plylib.cpp \
+    -o build/vcg_ply_write_probe
+
 echo "Running minimal mesh probe..."
 ./build/vcg_minimal_probe
 
@@ -34,7 +40,14 @@ echo "Running triangle bounding box probe..."
 echo "Running normals probe..."
 ./build/vcg_normals_probe
 
+echo "Running PLY write probe..."
+./build/vcg_ply_write_probe
+
+echo "PLY output header:"
+head -20 build/vcg_triangle_write_probe.ply
+
 echo "Runtime dependencies:"
 otool -L build/vcg_minimal_probe
 otool -L build/vcg_triangle_bbox_probe
 otool -L build/vcg_normals_probe
+otool -L build/vcg_ply_write_probe
