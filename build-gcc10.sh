@@ -38,6 +38,12 @@ g++ $COMMON_FLAGS $COMMON_INCLUDES \
     "$PLYLIB" \
     -o build/vcg_ply_read_probe
 
+echo "Building PLY roundtrip probe..."
+g++ $COMMON_FLAGS $COMMON_INCLUDES \
+    src/vcg_ply_roundtrip_probe.cpp \
+    "$PLYLIB" \
+    -o build/vcg_ply_roundtrip_probe
+
 echo "Running minimal mesh probe..."
 ./build/vcg_minimal_probe
 
@@ -56,9 +62,13 @@ head -20 build/vcg_triangle_write_probe.ply
 echo "Running PLY read probe..."
 ./build/vcg_ply_read_probe
 
+echo "Running PLY roundtrip probe..."
+./build/vcg_ply_roundtrip_probe
+
 echo "Runtime dependencies:"
 otool -L build/vcg_minimal_probe
 otool -L build/vcg_triangle_bbox_probe
 otool -L build/vcg_normals_probe
 otool -L build/vcg_ply_write_probe
 otool -L build/vcg_ply_read_probe
+otool -L build/vcg_ply_roundtrip_probe
